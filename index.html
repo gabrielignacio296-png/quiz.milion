@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Método VELA — Diagnóstico de Vídeos</title>
+<style>
+:root{--bg:#000;--card:#111;--gold:#f5c518;--gold2:#d9a400;--tx:#fff;--mut:#b5b5b5;--line:#2a2a2a;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;justify-content:center;padding:20px 16px;background-image:radial-gradient(circle at 50% -10%,#3a2c00 0,#000 55%)}
+.wrap{width:100%;max-width:620px;margin:auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px 22px;animation:in .45s ease}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tag{color:var(--gold);font-size:12px;letter-spacing:.14em;font-weight:700;margin-bottom:12px}
+h1{font-size:clamp(24px,6vw,34px);line-height:1.15;margin:0 0 14px}
+h1 span,h2 span{color:var(--gold)}
+h2{font-size:clamp(20px,5vw,26px);line-height:1.25;margin:0 0 20px}
+p{color:var(--mut);line-height:1.55;margin:0 0 20px}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;text-align:center;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,197,24,.3)}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.ghost{background:transparent;color:var(--mut);border:1px solid var(--line);font-weight:600}
+.ghost:hover{box-shadow:none;color:#fff}
+.bar{height:8px;background:#222;border-radius:8px;overflow:hidden;margin-bottom:8px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold2),var(--gold));transition:width .4s}
+.cnt{font-size:13px;color:var(--mut);margin-bottom:22px}
+.opt{display:block;width:100%;text-align:left;background:#0b0b0b;color:var(--tx);border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:10px;font-size:15px;line-height:1.4;cursor:pointer;transition:.2s}
+.opt:hover{border-color:#6b5a1a}
+.opt.sel{border-color:var(--gold);background:#1f1a05;box-shadow:0 0 0 1px var(--gold) inset}
+.nav{display:flex;gap:10px;margin-top:14px}
+.nav .btn{flex:1}
+.score{font-size:48px;font-weight:900;color:var(--gold);margin:6px 0}
+.score small{font-size:18px;color:var(--mut);font-weight:600}
+ul{padding-left:20px;color:var(--mut);line-height:1.6;margin:0 0 20px}
+.box{background:#0b0b0b;border:1px solid var(--gold);border-radius:14px;padding:16px;margin-bottom:18px}
+.box b{color:var(--gold)}
+.price{font-size:13px;color:var(--mut);text-align:center;margin-top:12px}
+.note{font-size:11.5px;color:#777;text-align:center;margin-top:18px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap"><div id="app"></div></div>
+<script>
+/* >>> COLOQUE AQUI O LINK DE COMPRA DO SEU PRODUTO <<< */
+var BUY_URL="https://pay.cakto.com.br/h3xh7s8_1367768";
+var PRICE="R$ 34,90";
+
+var Q=[
+{t:"Como você costuma começar seus vídeos?",s:1,o:["Com “oi, pessoal” ou uma apresentação longa","Com um assunto claro, mas sem muito impacto","Com uma imagem forte ou pergunta que chama atenção logo nos primeiros segundos"]},
+{t:"Como você desperta a curiosidade de quem assiste?",s:1,o:["Não penso nisso, só vou explicando","Às vezes faço uma pergunta ou promessa","Sempre abro uma dúvida que o próprio vídeo vai responder"]},
+{t:"Como você mantém a atenção até o final?",s:1,o:["Sinto que as pessoas saem logo no começo","Algumas partes são boas, outras ficam arrastadas","Cada cena traz algo novo e corto o que não serve"]},
+{t:"Como você organiza seus roteiros?",s:1,o:["Gravo ou crio de improviso","Tenho uma ideia geral, mas sem estrutura","Planejo começo, meio e fim antes de gerar o vídeo"]},
+{t:"Como você escolhe os temas dos seus vídeos?",s:1,o:["Posto o que vier na cabeça no dia","Sigo tendências, mas sem estratégia","Tenho um nicho definido e uma lista de ideias"]},
+{t:"Como você termina seus conteúdos?",s:1,o:["O vídeo simplesmente acaba","Peço para curtir e seguir","Entrego o que prometi e convido para um próximo passo natural"]},
+{t:"Qual renda extra você pretende alcançar com o marketing digital?",s:0,o:["Algo pequeno, para ajudar nas contas do mês","Uma renda complementar consistente","Transformar o digital na minha principal fonte de renda"]},
+{t:"O que você faria se pudesse aprender um método premium para criar vídeos bons e confiáveis?",s:0,o:["Começaria a postar com mais segurança e constância","Usaria para divulgar meus produtos ou serviços","Criaria uma rotina de produção para crescer meu perfil"]}
+];
+var R=[
+{max:4,hl:"Todo grande criador começa em algum lugar. O que falta é o Método VELA para transformar seu talento em vídeos que prendem a atenção.",tag:"RESULTADO 1",title:"Você está <span>apenas postando</span>",
+ txt:"Seus vídeos ainda dependem de improviso. Isso é normal no início — e é onde a maior parte das pessoas trava.",
+ pts:["Falta um gancho visual forte nos primeiros segundos","Falta estrutura de roteiro: começo, meio e fim","Falta uma rotina para testar e melhorar"],
+ cta:"O Método V.E.L.A. foi pensado exatamente para quem precisa sair do improviso e ganhar um processo repetível."},
+{max:8,hl:"Você está mais à frente do que muita gente que só posta. O que falta é o Método VELA para fazer o seu talento subir de nível.",tag:"RESULTADO 2",title:"Você tem <span>potencial</span>, mas falta estrutura",
+ txt:"Você já acerta em alguns pontos, mas a atenção do público ainda se perde pelo caminho.",
+ pts:["Transforme seu início em um visual de impacto","Crie um enigma que o vídeo realmente responda","Organize as cenas para manter o interesse até o fim"],
+ cta:"Com o Método V.E.L.A. você organiza essas peças em uma sequência clara, do roteiro à publicação."},
+{max:12,hl:"Você está bem na frente da maioria. O que falta é o Método VELA para levar o seu talento ainda mais longe.",tag:"RESULTADO 3",title:"Você está <span>perto do próximo nível</span>",
+ txt:"Sua base é boa. Agora o ganho está em refinar, padronizar e medir o que funciona.",
+ pts:["Padronize sua produção com modelos prontos","Teste uma variável por vez e analise os resultados","Adapte o mesmo tema para Reels, TikTok e Shorts"],
+ cta:"O guia traz modelos de prompts, checklists e calendário para transformar sua base em rotina."}
+];
+var app=document.getElementById("app"),i=-1,ans=[],qord=[],ord=[];
+function bar(){return '<div class="bar"><i style="width:'+(i/Q.length*100)+'%"></i></div><div class="cnt">Pergunta '+(i+1)+' de '+Q.length+'</div>'}
+function start(){i=-1;ans=[];var sh=function(a){var n=a.length,j,t;while(n>1){j=Math.floor(Math.random()*n--);t=a[n];a[n]=a[j];a[j]=t}return a};qord=sh([0,1,2,3,4,5]).concat([6,7]);ord=Q.map(function(){return sh([0,1,2])});
+ app.innerHTML='<div class="card"><div class="tag">MÉTODO VELA • VÍDEOS VIRAIS</div><h1>SEUS VÍDEOS TÊM <span>POTENCIAL</span> OU VOCÊ ESTÁ APENAS POSTANDO?</h1><p>Responda a algumas perguntas e descubra o que pode estar faltando para criar vídeos mais envolventes, prender a atenção e melhorar sua estratégia de conteúdo.</p><button class="btn" id="go">COMEÇAR MEU DIAGNÓSTICO</button></div>';
+ document.getElementById("go").onclick=function(){i=0;show()}}
+function show(){var qi=qord[i],q=Q[qi];
+ var h='<div class="card">'+bar()+'<h2>'+q.t+'</h2>';
+ ord[qi].forEach(function(k){h+='<button class="opt'+(ans[qi]===k?' sel':'')+'" data-k="'+k+'">'+q.o[k]+'</button>'});
+ h+='<div class="nav">'+(i>0?'<button class="btn ghost" id="bk">Voltar</button>':'')+'<button class="btn" id="nx"'+(ans[qi]==null?' disabled':'')+'>'+(i==Q.length-1?'Ver meu resultado':'Avançar')+'</button></div></div>';
+ app.innerHTML=h;
+ app.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){ans[qi]=+b.dataset.k;show()}});
+ var bk=document.getElementById("bk");if(bk)bk.onclick=function(){i--;show()};
+ document.getElementById("nx").onclick=function(){if(ans[qi]==null)return;if(i==Q.length-1)result();else{i++;show()}}}
+function result(){var sc=0;Q.forEach(function(q,k){if(q.s)sc+=ans[k]});
+ var r=R.filter(function(x){return sc<=x.max})[0];
+ var goal=["uma renda complementar pequena","uma renda extra consistente","fazer do digital sua principal fonte de renda"][ans[6]];
+ var h='<div class="card"><div class="tag">'+r.tag+'</div><div class="score">'+sc+'<small> / 12 pontos</small></div><h2>'+r.title+'</h2><p>'+r.txt+'</p><ul>'+r.pts.map(function(p){return'<li>'+p+'</li>'}).join('')+'</ul>'
+ +'<div class="box"><b>Seu objetivo:</b> '+goal+'.<br><span style="color:var(--mut)">'+r.cta+'</span></div>'
+ +'<a class="btn" href="'+BUY_URL+'" target="_blank" rel="noopener">QUERO O MÉTODO VELA</a><div class="price">Guia digital em PDF • acesso imediato</div>'
+ +'<div class="nav"><button class="btn ghost" id="rs">Refazer o diagnóstico</button></div>'
+ +'<div class="note">Este quiz é um diagnóstico educativo. O guia ensina um processo de criação e não garante viralização, seguidores, vendas ou renda. Guia independente, sem vínculo com PopMaker, Instagram, TikTok ou YouTube.</div></div>';
+ app.innerHTML=h;document.getElementById("rs").onclick=start}
+start();
+</script>
+</body>
+</html>
