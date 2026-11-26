@@ -42,8 +42,8 @@ ul{padding-left:20px;color:var(--mut);line-height:1.6;margin:0 0 20px}
 <div class="wrap"><div id="app"></div></div>
 <script>
 /* >>> COLOQUE AQUI O LINK DE COMPRA DO SEU PRODUTO <<< */
-var BUY_URL="https://pay.cakto.com.br/4cgi4xf";
-var PRICE="R$ 47,90";
+var BUY_URL="https://pay.cakto.com.br/h3xh7s8_1367768";
+var PRICE="R$ 34,90";
 
 var Q=[
 {t:"Como você costuma começar seus vídeos?",s:1,o:["Com “oi, pessoal” ou uma apresentação longa","Com um assunto claro, mas sem muito impacto","Com uma imagem forte ou pergunta que chama atenção logo nos primeiros segundos"]},
@@ -87,7 +87,7 @@ function result(){var sc=0;Q.forEach(function(q,k){if(q.s)sc+=ans[k]});
  var goal=["uma renda complementar pequena","uma renda extra consistente","fazer do digital sua principal fonte de renda"][ans[6]];
  var h='<div class="card"><div class="tag">'+r.tag+'</div><div class="score">'+sc+'<small> / 12 pontos</small></div><h2>'+r.title+'</h2><p>'+r.txt+'</p><ul>'+r.pts.map(function(p){return'<li>'+p+'</li>'}).join('')+'</ul>'
  +'<div class="box"><b>Seu objetivo:</b> '+goal+'.<br><span style="color:var(--mut)">'+r.cta+'</span></div>'
- +'<a class="btn" href="'+BUY_URL+'" target="_blank" rel="noopener">QUERO O MÉTODO VELA — '+PRICE+'</a><div class="price">Guia digital em PDF • acesso imediato</div>'
+ +'<a class="btn" href="'+BUY_URL+'" target="_blank" rel="noopener">QUERO O MÉTODO VELA</a><div class="price">Guia digital em PDF • acesso imediato</div>'
  +'<div class="nav"><button class="btn ghost" id="rs">Refazer o diagnóstico</button></div>'
  +'<div class="note">Este quiz é um diagnóstico educativo. O guia ensina um processo de criação e não garante viralização, seguidores, vendas ou renda. Guia independente, sem vínculo com PopMaker, Instagram, TikTok ou YouTube.</div></div>';
  app.innerHTML=h;document.getElementById("rs").onclick=start}
